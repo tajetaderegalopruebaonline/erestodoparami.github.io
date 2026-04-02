@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TE AMO Mi Vida Hermosa</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- SEO básico -->
+  <meta name="description" content="Una tarjeta digital romántica hecha con amor, con mensajes, dedicatoria especial, música y recuerdos en fotos. 💌✨">
+  <meta name="keywords" content="tarjeta de amor, dedicatoria romántica, regalo digital, fotos de amor, música romántica">
+  <meta name="author" content="Tu Amor ❤️">
+
+  <!-- Open Graph (Facebook, WhatsApp) -->
+  <meta property="og:title" content="🌹 Tarjeta de Amor para Ti 💖">
+  <meta property="og:description" content="Un regalo digital lleno de amor, magia y mensajes que salen del corazón... TE AMO, MI REINA HERMOSA. 💌">
+  <meta property="og:image" content="https://ereselamordemividasara-dotcom.github.io/erestodoparami.github.io/imagenes/imagen1.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ereselamordemividasara-dotcom.github.io/erestodoparami.github.io/">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tarjeta de Amor 💝">
+  <meta name="twitter:description" content="Un detalle romántico con fotos, música y mensajes especiales solo para ti.">
+  <meta name="twitter:image" content="https://ereselamordemividasara-dotcom.github.io/erestodoparami.github.io/imagen1.jpg">
+
+<!-- Ícono -->
+<link rel="icon" href="imagenes/corazon.ico" type="image/x-icon">
+
+</head>
+<body>
+
+<header class="site-header">
+  <h1>💖 Mi Tarjeta de Amor 💖</h1>
+</header>
+
+  <!-- lienzo del fondo animado -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- 🥰 Contenedor tarjeta + carrusel -->
+  <div class="main-container">
+
+    <!-- 💌 Tarjeta -->
+    <div class="wrap">
+      <div class="card" role="article" aria-label="Tarjeta digital de amor">
+        <header>
+          <div class="logo" aria-hidden>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 20s-7-4.6-9-8.5C0 6.9 4.1 3 7.6 5.1 
+              10 6.8 12 9 12 9s2-2.2 4.4-3.9C19.9 3 24 6.9 
+              21 11.5 19 15.4 12 20 12 20z" fill="white"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Para ti, con amor</h1>
+            <p class="subtitle">Toca el corazón y descubre mi secreto 💌</p>
+          </div>
+        </header>
+
+        <div class="heart-area">
+          <div class="heart" id="heartBtn">
+            <svg viewBox="0 0 24 24" class="pulse" id="heartSVG">
+              <path d="M12 21s-7-4.35-9-8.2C0.5 7.9 4.6 4 8.1 6.1 
+              10.5 7.8 12 10 12 10s1.5-2.2 3.9-3.9C19.4 4 
+              23.5 7.9 21 12.8 19 16.65 12 21 12 21z" fill="url(#g)"/>
+              <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#ff8aa3"/>
+                  <stop offset="100%" stop-color="#ff2d6f"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <p class="click-hint" id="clickHint">✨ Haz clic en el corazón ✨</p>
+        </div>
+
+        <footer>
+          Hecho con todo mi ❤️   
+          <br>
+          <span class="year">&copy; 2026</span>
+        </footer>
+      </div>
+    </div>
+
+    <!-- 🎠 Carrusel -->
+    <div class="carousel">
+      <div class="slides">
+        <img src="imagenes/imagen1.jpg" alt="Foto 1">
+        <img src="imagenes/imagen2.jpg" alt="Foto 2">
+        <img src="imagenes/imagen3.jpg" alt="Foto 3">
+        <img src="imagenes/imagen4.jpg" alt="Foto 4">
+       
+        <!-- Agrega más fotos según necesites -->
+      </div>
+      <button class="prev">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="#ff2d6f">
+        <path d="M12 21s-6.6-4.4-9-8.3C0.6 7.8 4 3.5 8 5.7c2 1.2 4 3.6 4 3.6s2-2.4 4-3.6c4-2.2 7.4 2.1 5 7-2.4 3.9-9 8.3-9 8.3z"/>
+      </svg>
+    </button>
+
+    <button class="next">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="#ff2d6f">
+        <path d="M12 21s-6.6-4.4-9-8.3C0.6 7.8 4 3.5 8 5.7c2 1.2 4 3.6 4 3.6s2-2.4 4-3.6c4-2.2 7.4 2.1 5 7-2.4 3.9-9 8.3-9 8.3z"/>
+      </svg>
+      </button>
+
+    </div>
+
+  </div> <!-- cierre main-container -->
+
+  <!-- overlay -->
+  <div class="overlay" id="overlay">
+    <div class="panel">
+      <button class="close" id="closeBtn">✕</button>
+      <canvas class="confetti" id="confetti"></canvas>
+      <div class="content">
+        <h2 id="title">Mi mensaje para ti...</h2>
+        <div class="message">
+          <div class="typed" id="typed"></div>
+          <div class="signature" id="sig"></div>
+        </div>
+
+          <div class="dedicatoria">
+          <h3>Dedicatoria Especial ✨</h3>
+          <p id="typedDedicatoria"></p>
+
+         <button class="surprise-btn" onclick="showSurprise()">🎁 Toca aquí</button>
+
+          <p id="surpriseMsg" class="surprise hidden"></p>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 🎶 Música de fondo -->
+  <audio id="bgMusic" preload="auto">
+    <source src="musica/Sobakasu- Judy & Mary.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <!-- Footer -->
+<footer class="site-footer">
+  <p>Hecho con ❤️ por tu amor</p>
+  <p>&copy; 2026 | Todos los derechos reservados</p>
+</footer>
+  <!-- Footer end -->
+
+  <script src="script.js"></script>
+</body>
+</html>

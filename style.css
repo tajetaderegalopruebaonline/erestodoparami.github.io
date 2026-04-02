@@ -1,0 +1,421 @@
+:root{
+  --accent:#ff6b9a;
+  --accent2:#ffb3c6;
+  --text:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:"Poppins",sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-header {
+  text-align: center;
+  padding: 20px 0;
+  background: linear-gradient(135deg, #ff6b9a, #ffb3c6); /* mismo gradiente que footer */
+  color: #1e293b; /* letras oscuras */
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.site-header h1 {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+#bgCanvas{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1;
+  background:radial-gradient(circle at top,#0f172a,#1e293b);
+}
+
+/* Contenedor principal */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 40px;
+  flex: 1; /* Para que el contenido ocupe el espacio restante */
+}
+
+/* Tarjeta */
+.wrap { display:flex; flex-direction: column; align-items: center; }
+.card{
+  background: rgba(255,255,255,0.05);
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  transition: transform .4s ease, box-shadow .4s ease;
+  max-height: 500px;
+  overflow: hidden;
+}
+.card:hover{
+  transform: scale(1.03);
+  box-shadow:0 20px 50px rgba(255,107,154,0.2);
+}
+.logo{
+  width:56px; height:56px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:50%;
+  margin:0 auto 10px;
+}
+
+.logo svg {
+    width: 50px;
+    height: 50px;
+}
+
+
+.logo svg path {
+  fill: #1e293b; /* oscuro para que se vea */
+}
+
+h1{font-size:20px}
+.subtitle{font-size:13px; opacity:.9}
+.heart-area{margin:20px 0; position:relative}
+.heart svg{width:120px; height:120px; cursor:pointer;}
+.pulse{animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(0.95)}50%{transform:scale(1.1)}}
+.click-hint{margin-top:8px; font-size:14px; opacity:.85; color:var(--accent2);}
+
+/* Carrusel */
+.carousel {
+  position: relative;
+  width: 100%;      /* que se adapte al ancho del padre */
+  width: 450px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(255,107,154,0.25);
+  animation: fadeIn .8s ease forwards;
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 16px;
+}
+
+.carousel button {
+  position: absolute;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #ff6b9a;
+  color: #ff2d6f;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  animation: glow 2s infinite;
+}
+
+/* ✨ Hover */
+.carousel button:hover {
+  background: #ff6b9a;
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 107, 154, 0.6);
+  transform: scale(1.2) translateY(-50%); /* 🔥 mantiene la posición y añade zoom */
+}
+
+/* Animación brillo */
+@keyframes glow {
+  0%   { box-shadow: 0 0 6px rgba(255,107,154,0.4); }
+  50%  { box-shadow: 0 0 18px rgba(255,107,154,0.8); }
+  100% { box-shadow: 0 0 6px rgba(255,107,154,0.4); }
+}
+
+/* Posiciones con rotación */
+.carousel .prev {
+  left: 6px;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.carousel .next {
+  right: 6px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* 🔥 Hover específico para conservar rotación */
+.carousel .prev:hover {
+  transform: translateY(-50%) rotate(-45deg) scale(1.2);
+}
+
+.carousel .next:hover {
+  transform: translateY(-50%) rotate(45deg) scale(1.2);
+}
+
+
+/* Overlay */
+.overlay{
+  position: fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter:blur(6px);
+  opacity:0; pointer-events:none;
+  transition:opacity .4s ease;
+  z-index: -1;
+}
+.overlay.open{
+  opacity:1; pointer-events:auto;
+  z-index:999;
+}
+.panel{
+  position:relative;
+  background:linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
+  border-radius:20px;
+  padding:28px;
+  max-width:600px; width:90%;
+  text-align:center;
+  animation:fadeIn .8s ease forwards;
+}
+@keyframes fadeIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.close{
+  position:absolute;right:15px;top:15px;
+  background:transparent;border:0;
+  color:var(--text); font-size:18px; cursor:pointer;
+}
+.message{
+  margin-top:14px;
+  background:rgba(255,255,255,0.05);
+  padding:16px;
+  border-radius:12px;
+  font-size:16px;
+  line-height:1.5;
+}
+.signature{margin-top:10px;font-size:14px;opacity:.9}
+canvas.confetti{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+/* Dedicatoria */
+.dedicatoria{
+  margin-top:22px;
+  padding:16px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.07);
+  box-shadow:0 4px 14px rgba(255,107,154,0.2);
+  animation:fadeUp .8s ease;
+}
+.dedicatoria h3{
+  margin-bottom:10px;
+  font-size:18px;
+  color:var(--accent2);
+}
+.dedicatoria p{
+  font-size:15px;
+  line-height:1.6;
+  white-space:pre-line;
+}
+
+.surprise-btn {
+  margin-top: 15px;
+  background: #ff2d6f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.surprise {
+  opacity: 1;
+  transform: translateY(10px);
+  font-style: italic;
+  color: #ff2d6f;
+  margin-top: 12px;
+  text-align: center;
+  min-height: 24px; /* evita saltos */
+}
+
+/* cursor tipo máquina */
+.surprise::after {
+  content: "▍";
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+.hidden {
+  display: none;
+}
+
+.heart-float {
+  position: absolute;
+  font-size: clamp(14px, 4vw, 28px);
+  animation: floatUp 2.2s ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15vh) scale(1.6);
+  }
+}
+
+.bg-heart {
+  position: fixed;
+  bottom: -5vh;
+  font-size: clamp(12px, 4vw, 34px); /* 👈 responsive real */
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatHeart linear forwards;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.6);
+    opacity: 0;
+  }
+}
+
+
+
+
+.site-footer {
+  text-align: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #ff6b9a, #ffb3c6); /* igual que el corazón */
+  color: #1e293b; /* letras oscuras */
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+  margin-top: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-footer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 -6px 18px rgba(0,0,0,0.25);
+}
+
+.site-footer p {
+  margin: 4px 0;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .main-container{
+  flex-direction:column; 
+  align-items:center;
+}
+
+  .logo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .logo svg {
+    width: 45px;
+    height: 45px;
+  }
+
+  .wrap{
+  margin-bottom:20px;
+
+}
+
+  .close {
+    font-size: 24px;  /* más grande en tablets y móviles */
+  }
+
+  .carousel{
+  width:90%; 
+  max-width:400px; 
+  height:240px;
+
+  .message, .dedicatoria p, .signature {
+    font-size: 18px;  /* tamaño mayor para móviles */
+    line-height: 1.6; /* más espacio entre líneas */
+    padding: 14px;
+  }
+
+  .dedicatoria h3 {
+    font-size: 20px; /* título dedicatoria más visible */
+  }
+}
+}
+@media(max-width:480px){
+  .carousel{
+  height:220px; 
+  width:320px;
+}
+  .carousel button{width:38px;
+  height:38px;
+  font-size:18px;
+  }
+  .logo {
+    width: 72px;
+    height: 72px;
+  }
+  .logo svg {
+    width: 40px;
+    height: 40px;
+  }
+  .heart svg{
+  width:90px;
+  height:90px;
+}
+  .message, .dedicatoria p, .signature {
+    font-size: 18px;  
+    line-height: 1.2;
+    padding: 10px;
+  }
+
+  .close {
+    font-size: 28px;  /* aún más grande en móviles pequeños */
+  }
+
+  .dedicatoria h3 {
+    font-size: 20px;
+  }
+}
